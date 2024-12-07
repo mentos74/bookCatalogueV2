@@ -6,7 +6,7 @@ import lombok.Data;
 
 import java.util.Map;
 @Data
-public class BookRepositoryImpl implements BookRepository {
+public class BookRepositoryImpl implements BookRepository{
 
     private Map<Long, Book> bookMap;
 
@@ -14,6 +14,7 @@ public class BookRepositoryImpl implements BookRepository {
     @Override
     public Book findBookById(Long id) {
         Book book = bookMap.get(id);
-        return  book;
+        return book;
     }
+
 }

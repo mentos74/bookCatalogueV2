@@ -14,7 +14,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Service("bookService")
-public class BookServiceImpl implements BookService {
+public class BookServiceImpl implements BookService{
 
 	private final BookRepository bookRepository;
 
@@ -37,8 +37,8 @@ public class BookServiceImpl implements BookService {
 //	public void setBookRepository(BookRepository bookRepository) {
 //		this.bookRepository = bookRepository;
 //	}
-	
-	
-	
-	
+
+
+
+
 }
