@@ -10,6 +10,7 @@ import java.util.Map;
 @Data
 public class BookRepositoryImpl implements BookRepository{
 
+
     private Map<Long, Book> bookMap;
 
 
@@ -23,6 +24,13 @@ public class BookRepositoryImpl implements BookRepository{
     public List<Book> findAll() {
         List <Book> bookList = new ArrayList<>(bookMap.values());
         return bookList;
+    }
+
+    @Override
+    public void save(Book book) {
+        int size = bookMap.size();
+        book.setId(Long.valueOf(size+1));
+        bookMap.put(book.getId(),book);
     }
 
 }

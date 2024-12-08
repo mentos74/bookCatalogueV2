@@ -1,6 +1,8 @@
 package com.mentos74.catalogue.services.impl;
 
+import com.mentos74.catalogue.domain.Author;
 import com.mentos74.catalogue.domain.Book;
+import com.mentos74.catalogue.dto.BookCreateDTO;
 import com.mentos74.catalogue.dto.BookDetailDTO;
 import com.mentos74.catalogue.repository.BookRepository;
 import com.mentos74.catalogue.services.BookService;
@@ -44,6 +46,19 @@ public class BookServiceImpl implements BookService{
 			dto.setBookId(b.getId());
 			return dto;
 		} ).collect(Collectors.toList());
+	}
+
+	@Override
+	public void createNewBook(BookCreateDTO dto) {
+		Author author = new Author();
+		author.setName(dto.getAuthorName());
+
+		Book book = new Book();
+		book.setDescription(dto.getDescription());
+		book.setTitle(dto.getBookTitle());
+		book.setAuthor(author);
+		bookRepository.save(book);
+
 	}
 
 //	public BookRepository getBookRepository() {
