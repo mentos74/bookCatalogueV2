@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @AllArgsConstructor
 @RestController
-public class BookController {
+public class BookResource {
 
     private final BookService bookService;
 

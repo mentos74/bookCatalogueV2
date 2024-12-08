@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @AllArgsConstructor
@@ -28,6 +31,19 @@ public class BookServiceImpl implements BookService{
 		dto.setBookTitle(book.getTitle());
 		dto.setBookDescription(book.getDescription());
 		return dto;
+	}
+
+	@Override
+	public List<BookDetailDTO> listBookDetail() {
+		List <Book> listAll = bookRepository.findAll();
+
+		return listAll.stream().map((b) ->{
+			BookDetailDTO dto = new BookDetailDTO();
+			dto.setAuthorName(b.getAuthor().getName());
+			dto.setBookDescription(b.getDescription());
+			dto.setBookId(b.getId());
+			return dto;
+		} ).collect(Collectors.toList());
 	}
 
 //	public BookRepository getBookRepository() {

@@ -3,15 +3,14 @@ package com.mentos74.catalogue.web;
 import com.mentos74.catalogue.services.GreetingServices;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class HelloController {
-    Logger log = LoggerFactory.getLogger(HelloController.class);
+public class HelloResource {
+    Logger log = LoggerFactory.getLogger(HelloResource.class);
 
-    public HelloController(GreetingServices gs) {
+    public HelloResource(GreetingServices gs) {
         this.gs = gs;
     }
 
