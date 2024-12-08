@@ -11,6 +11,7 @@ public class HomeController {
     @GetMapping(value = "/home")
 //@RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home(Model model) {
+        model.addAttribute("name","rezza");
         return "home";
     }
 

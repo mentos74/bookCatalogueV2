@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 
 </head>
@@ -7,6 +7,8 @@
 
     <h1> これは私のヘッダーです </h1>
     <p1> First Paragraph</p1>
+    <h1></h1>
+    <p1 > Hi,  <span th:text="${name}"></span>  </p1>
 
 </body>
 
