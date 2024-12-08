@@ -6,7 +6,26 @@
 <body>
 
 <h1> Book List </h1>
-<p > Hi,  <span th:text="${books}"></span>  </p>
+<table>
+
+<tr>
+    <td><b>Id</b> </td>
+    <td><b>Book Name</b> </td>
+    <td><b>Author Name </b></td>
+    <td><b>Description </b></td>
+</tr>
+<tr th:each="book: ${books}">
+    <td th:text="${book.bookId}"> </td>
+    <td th:text="${book.authorName}"> </td>
+    <td th:text="${book.bookTitle}"> </td>
+    <td th:text="${book.bookDescription}"> </td>
+</tr>
+
+
+
+
+
+</table>
 
 </body>
 
