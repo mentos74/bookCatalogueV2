@@ -11,6 +11,7 @@
         <tr>
             <td><b>Title </b></td>
             <td> : <input name="title" type="text" th:field="*{bookTitle}"></td>
+            <div th:if="${#fields.hasErrors('bookTitle')}" th:errors="* {bookTitle}"></div>
         </tr>
         <tr>
             <td><b>Author Name </b></td>
