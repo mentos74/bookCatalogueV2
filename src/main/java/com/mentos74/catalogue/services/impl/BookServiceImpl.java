@@ -42,6 +42,7 @@ public class BookServiceImpl implements BookService{
 		return listAll.stream().map((b) ->{
 			BookDetailDTO dto = new BookDetailDTO();
 			dto.setAuthorName(b.getAuthor().getName());
+			dto.setBookTitle(b.getTitle());
 			dto.setBookDescription(b.getDescription());
 			dto.setBookId(b.getId());
 			return dto;
