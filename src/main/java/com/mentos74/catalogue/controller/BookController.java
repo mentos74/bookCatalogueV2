@@ -38,8 +38,12 @@ public class BookController {
     }
 
     @PostMapping("/add")
-    public String addBookNew(@ModelAttribute(value="bookCreateDTO") @Valid BookCreateDTO bookCreateDTO, Model model
-    , BindingResult bindingResult, Errors errors) {
+    public String addBookNew(@ModelAttribute("bookCreateDTO") @Valid BookCreateDTO bookCreateDTO,
+                             BindingResult bindingResult,
+                             Errors errors ,
+                             Model model) {
+
+
         if(errors.hasErrors()){
             model.addAttribute("bookCreateDTO",bookCreateDTO);
             return "book/add";
