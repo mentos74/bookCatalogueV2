@@ -1,21 +1,32 @@
 package com.mentos74.catalogue.domain;
 
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
+
+
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name="author")
 public class Author {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+    @Column(name="name", nullable = false, columnDefinition = "varchar(300)")
     private String name;
 
-    private Long birthDate;
+
+    @Column(name="birth_date", nullable = false)
+    private LocalDate birthDate;
 
 
 
