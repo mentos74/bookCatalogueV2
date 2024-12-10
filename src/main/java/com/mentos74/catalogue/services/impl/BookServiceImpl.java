@@ -4,6 +4,7 @@ import com.mentos74.catalogue.domain.Author;
 import com.mentos74.catalogue.domain.Book;
 import com.mentos74.catalogue.dto.BookCreateDTO;
 import com.mentos74.catalogue.dto.BookDetailDTO;
+import com.mentos74.catalogue.dto.BookUpdateRequestDTO;
 import com.mentos74.catalogue.repository.BookRepository;
 import com.mentos74.catalogue.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,18 @@ public class BookServiceImpl implements BookService{
 		book.setTitle(dto.getBookTitle());
 		book.setAuthor(author);
 		bookRepository.save(book);
+
+	}
+
+	@Override
+	public void updateBook(Long bookId, BookUpdateRequestDTO dto) {
+
+		Book book = bookRepository.findBookById(bookId);
+		book.setTitle(dto.getBookTitle());
+		book.setDescription(dto.getDescription());
+
+		bookRepository.update(book);
+
 
 	}
 

@@ -2,6 +2,7 @@ package com.mentos74.catalogue.web;
 
 import com.mentos74.catalogue.dto.BookCreateDTO;
 import com.mentos74.catalogue.dto.BookDetailDTO;
+import com.mentos74.catalogue.dto.BookUpdateRequestDTO;
 import com.mentos74.catalogue.services.BookService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,6 +41,16 @@ public class BookResource {
     public ResponseEntity<List<BookDetailDTO>> findBookList(){
 
         return ResponseEntity.ok().body(bookService.listBookDetail());
+    }
+
+
+    @PutMapping("/book/{bookId}")
+    public ResponseEntity<Void> updateBook(@PathVariable Long bookId,
+                                           @RequestBody BookUpdateRequestDTO dto){
+
+        bookService.updateBook(bookId,dto);
+
+        return ResponseEntity.ok().build();
     }
 }
 

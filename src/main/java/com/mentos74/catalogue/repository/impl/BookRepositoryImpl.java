@@ -33,4 +33,12 @@ public class BookRepositoryImpl implements BookRepository{
         bookMap.put(book.getId(),book);
     }
 
+    @Override
+    public void update(Book book) {
+
+
+        bookMap.put(book.getId(),book);
+
+    }
+
 }
