@@ -41,4 +41,10 @@ public class BookRepositoryImpl implements BookRepository{
 
     }
 
+    @Override
+    public void delete(Long id) {
+
+        bookMap.remove(id);
+    }
+
 }
