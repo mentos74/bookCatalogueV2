@@ -13,4 +13,5 @@ public interface AuthorService {
     public List<Author> findByNameLike(String name);
     public void createNewAuthor(List <AuthorCreateRequestDTO> dto);
     public void updateAuthor(Long id, AuthorUpdateRequestDTO dto);
+    public void deleteAuthor(Long id);
 }
