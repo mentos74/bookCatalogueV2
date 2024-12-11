@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,11 +38,16 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public void createNewAuthor(AuthorCreateRequestDTO dto) {
-        Author author = new Author();
-        author.setName(dto.getAuthorName());
-        author.setBirthDate(LocalDate.ofEpochDay(dto.getBirthDate()));
-        authorRepository.save(author);
+    public void createNewAuthor(List <AuthorCreateRequestDTO> listDto) {
+        List <Author> listAuthor = new ArrayList<>();
+        for(AuthorCreateRequestDTO dto: listDto){
+            Author author = new Author();
+            author.setName(dto.getAuthorName());
+            author.setBirthDate(LocalDate.ofEpochDay(dto.getBirthDate()));
+            listAuthor.add(author);
+        }
+
+        authorRepository.saveAll(listAuthor);
 
     }
 }

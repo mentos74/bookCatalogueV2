@@ -10,5 +10,5 @@ import java.util.List;
 public interface AuthorService {
     public AuthorResponseDTO findById(Long id);
     public List<Author> findByNameLike(String name);
-    public void createNewAuthor(AuthorCreateRequestDTO dto);
+    public void createNewAuthor(List <AuthorCreateRequestDTO> dto);
 }

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -22,7 +23,7 @@ private final AuthorService authorService;
     }
 
     @PostMapping("/author")
-    public ResponseEntity<AuthorCreateRequestDTO> createNewAuthor (@RequestBody @Valid AuthorCreateRequestDTO dto){
+    public ResponseEntity<List<AuthorCreateRequestDTO>> createNewAuthor (@RequestBody @Valid  List <AuthorCreateRequestDTO> dto){
         authorService.createNewAuthor(dto);
         return ResponseEntity.created(URI.create("/author")).build();
     }
