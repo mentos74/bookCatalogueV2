@@ -1,6 +1,7 @@
 package com.mentos74.catalogue.services.impl;
 
 import com.mentos74.catalogue.domain.Author;
+import com.mentos74.catalogue.dto.AuthorCreateRequestDTO;
 import com.mentos74.catalogue.dto.AuthorResponseDTO;
 import com.mentos74.catalogue.exception.BadRequestException;
 import com.mentos74.catalogue.repository.AuthorRepository;
@@ -9,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,5 +34,14 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public List<Author> findByNameLike(String name) {
         return List.of();
+    }
+
+    @Override
+    public void createNewAuthor(AuthorCreateRequestDTO dto) {
+        Author author = new Author();
+        author.setName(dto.getAuthorName());
+        author.setBirthDate(LocalDate.ofEpochDay(dto.getBirthDate()));
+        authorRepository.save(author);
+
     }
 }
