@@ -2,6 +2,7 @@ package com.mentos74.catalogue.web;
 
 import com.mentos74.catalogue.dto.AuthorCreateRequestDTO;
 import com.mentos74.catalogue.dto.AuthorResponseDTO;
+import com.mentos74.catalogue.dto.AuthorUpdateRequestDTO;
 import com.mentos74.catalogue.services.AuthorService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -26,6 +27,13 @@ private final AuthorService authorService;
     public ResponseEntity<List<AuthorCreateRequestDTO>> createNewAuthor (@RequestBody @Valid  List <AuthorCreateRequestDTO> dto){
         authorService.createNewAuthor(dto);
         return ResponseEntity.created(URI.create("/author")).build();
+    }
+
+    @PutMapping("/author/{id}")
+    public ResponseEntity<AuthorUpdateRequestDTO> updateAuthor(@PathVariable Long id, @RequestBody AuthorUpdateRequestDTO dto){
+        authorService.updateAuthor(id,dto);
+        return ResponseEntity.ok().build();
+
     }
 
 }
