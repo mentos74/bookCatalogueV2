@@ -44,6 +44,7 @@ public class AuthorServiceImpl implements AuthorService {
             Author author = new Author();
             author.setName(dto.getAuthorName());
             author.setBirthDate(LocalDate.ofEpochDay(dto.getBirthDate()));
+            author.setDeleted(false);
             listAuthor.add(author);
         }
 
@@ -61,7 +62,11 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public void deleteAuthor(Long id) {
+//        Author author = authorRepository.findByIdAndDeletedFalse(id).orElseThrow(()-> new BadRequestException("invalidId"));
+//        author.setDeleted(true);
+//        authorRepository.save(author);
         authorRepository.deleteById(id);
+
     }
 
 
