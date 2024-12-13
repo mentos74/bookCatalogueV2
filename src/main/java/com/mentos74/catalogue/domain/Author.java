@@ -23,7 +23,8 @@ import java.time.LocalDate;
 public class Author {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "author_generator")
+    @SequenceGenerator(name = "author_generator",sequenceName = "author_id_seq")
     private Long id;
 
     @Column(name = "author_name", nullable = false, columnDefinition = "varchar(300)")
