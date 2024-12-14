@@ -23,7 +23,8 @@ import java.time.LocalDate;
 public class Author {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "author_generator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "author_generator")
     @SequenceGenerator(name = "author_generator",sequenceName = "author_id_seq")
     private Long id;
 

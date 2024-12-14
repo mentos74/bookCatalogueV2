@@ -5,6 +5,7 @@ import com.mentos74.catalogue.domain.Book;
 import com.mentos74.catalogue.dto.BookCreateDTO;
 import com.mentos74.catalogue.dto.BookDetailDTO;
 import com.mentos74.catalogue.dto.BookUpdateRequestDTO;
+import com.mentos74.catalogue.exception.BadRequestException;
 import com.mentos74.catalogue.repository.BookRepository;
 import com.mentos74.catalogue.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +28,11 @@ public class BookServiceImpl implements BookService{
 
 	@Override
 	public BookDetailDTO findBookDetailById(Long bookId) {
-		Book book = bookRepository.findBookById(bookId);
+		Book book = bookRepository.findById(bookId).
+				orElseThrow(()-> new BadRequestException("book_id invalid"));
 		BookDetailDTO dto = new BookDetailDTO();
 		dto.setBookId(book.getId());
-		dto.setAuthorName(book.getAuthor().getName());
+//		dto.setAuthorName(book.getAuthor().getName());
 		dto.setBookTitle(book.getTitle());
 		dto.setBookDescription(book.getDescription());
 		return dto;
@@ -42,7 +44,7 @@ public class BookServiceImpl implements BookService{
 
 		return listAll.stream().map((b) ->{
 			BookDetailDTO dto = new BookDetailDTO();
-			dto.setAuthorName(b.getAuthor().getName());
+//			dto.setAuthorName(b.getAuthor().getName());
 			dto.setBookTitle(b.getTitle());
 			dto.setBookDescription(b.getDescription());
 			dto.setBookId(b.getId());
@@ -58,7 +60,7 @@ public class BookServiceImpl implements BookService{
 		Book book = new Book();
 		book.setDescription(dto.getDescription());
 		book.setTitle(dto.getBookTitle());
-		book.setAuthor(author);
+//		book.setAuthor(author);
 		bookRepository.save(book);
 
 	}
@@ -66,18 +68,19 @@ public class BookServiceImpl implements BookService{
 	@Override
 	public void updateBook(Long bookId, BookUpdateRequestDTO dto) {
 
-		Book book = bookRepository.findBookById(bookId);
+		Book book = bookRepository.findById(bookId).
+				orElseThrow(()-> new BadRequestException("book_id invalid"));
 		book.setTitle(dto.getBookTitle());
 		book.setDescription(dto.getDescription());
 
-		bookRepository.update(book);
+		bookRepository.save(book);
 
 
 	}
 
 	@Override
 	public void deleteBook(Long bookId) {
-		bookRepository.delete(bookId);
+		bookRepository.deleteById(bookId);
 	}
 
 //	public BookRepository getBookRepository() {
