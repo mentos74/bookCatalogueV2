@@ -2,13 +2,12 @@ package com.mentos74.catalogue.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
-import java.io.Serializable;
 import java.util.List;
 
 @Entity
+@Table(name = "publisher")
 @Data
-public class Publisher implements Serializable {
+public class Publisher extends AbstarctBaseEntity   {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "publisher_generator")

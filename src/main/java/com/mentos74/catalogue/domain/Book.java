@@ -8,9 +8,11 @@ import java.util.List;
 
 
 @Data
-@Table(name = "book")
+@Table(name = "book", indexes = {
+        @Index(name = "uk_secure_id",columnList = "secure_id")
+})
 @Entity
-public class Book implements Serializable {
+public class Book extends AbstarctBaseEntity {
 
     /**
      *
