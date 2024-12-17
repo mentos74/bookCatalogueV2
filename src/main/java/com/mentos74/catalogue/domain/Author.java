@@ -19,7 +19,7 @@ import java.util.UUID;
 @Entity
 @DynamicUpdate
 @Table(name = "author", indexes = {
-        @Index(name = "uk_secure_id",columnList = "secure_id")
+        @Index(name = "author_secure_id",columnList = "secure_id")
 })
 @SQLDelete(sql="UPDATE author set deleted = true where id = ?")
 @Where(clause =  "deleted=false")

@@ -5,12 +5,11 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
-import java.io.Serial;
 import java.io.Serializable;
 
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @Data
-public class PubliserCreateRequestDTO implements Serializable {
+public class PublisherCreateRequestDTO implements Serializable {
 
 
 

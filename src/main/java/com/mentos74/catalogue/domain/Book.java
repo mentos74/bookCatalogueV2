@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @Table(name = "book", indexes = {
-        @Index(name = "uk_secure_id",columnList = "secure_id")
+        @Index(name = "book_secure_id",columnList = "secure_id")
 })
 @Entity
 public class Book extends AbstarctBaseEntity {

@@ -1,12 +1,13 @@
 package com.mentos74.catalogue.services.impl;
 
 import com.mentos74.catalogue.domain.Publisher;
-import com.mentos74.catalogue.dto.PubliserCreateRequestDTO;
+import com.mentos74.catalogue.dto.PublisherCreateRequestDTO;
 import com.mentos74.catalogue.dto.PublisherUpdateRequestDTO;
 import com.mentos74.catalogue.exception.BadRequestException;
 import com.mentos74.catalogue.repository.PublisherRepository;
 import com.mentos74.catalogue.services.PublisherService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
@@ -14,14 +15,16 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class PublisherServiceImpl implements PublisherService {
 
+    @Autowired
     private PublisherRepository publisherRepository;
 
     @Override
-    public void createPublisher(PubliserCreateRequestDTO dto) {
+    public void createPublisher(PublisherCreateRequestDTO dto) {
         Publisher publisher = new Publisher();
         publisher.setAddress(dto.getAddress());
         publisher.setName(dto.getPublisherName());
         publisher.setCompanyName(dto.getCompanyName());
+        publisher.setDeleted(false);
 
         publisherRepository.save(publisher);
 
