@@ -57,8 +57,6 @@ public class PublisherServiceImpl implements PublisherService {
     @Override
     public ResultPageResponseDTO<PublisherListResponseDTO> findPublisherList(Integer pages, Integer limit, String sortBy, String direction, String publisherName) {
         publisherName = StringUtils.isBlank(publisherName) ? "%" : publisherName + "%";
-        System.out.println("1 >>"+PaginationUtil.getSortBy(sortBy));
-        System.out.println("2 >>"+direction);
         Sort sort = Sort.by(new Sort.Order(PaginationUtil.getSortBy(direction),sortBy)z);
         Pageable pageable = PageRequest.of(pages, limit, sort);
         Page<Publisher> pageResult = publisherRepository.findByNameLikeIgnoreCase(publisherName, pageable);
