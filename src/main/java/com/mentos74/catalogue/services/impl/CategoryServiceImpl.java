@@ -4,7 +4,6 @@ import com.mentos74.catalogue.domain.Category;
 import com.mentos74.catalogue.domain.Publisher;
 import com.mentos74.catalogue.dto.CategoryCreateUpdateRequestDTO;
 import com.mentos74.catalogue.dto.CategoryListResponseDTO;
-import com.mentos74.catalogue.dto.PublisherListResponseDTO;
 import com.mentos74.catalogue.dto.ResultPageResponseDTO;
 import com.mentos74.catalogue.repository.CategoryRepository;
 import com.mentos74.catalogue.services.CategoryService;
@@ -47,12 +46,15 @@ public class CategoryServiceImpl implements CategoryService {
         categoryName = StringUtils.isBlank(categoryName) ? "%" : categoryName + "%";
         Sort sort = Sort.by(new Sort.Order(PaginationUtil.getSortBy(direction),sortBy));
         Pageable pageable = PageRequest.of(pages, limit, sort);
-        Page<Publisher> pageResult = categoryRepository.findByNameLikeIgnoreCase(categoryName, pageable);
+        System.out.println("1>>"+categoryName);
+        System.out.println("2>>"+pageable);
+        Page<Category> pageResult = categoryRepository.findByNameLikeIgnoreCase(categoryName, pageable);
 
         List<CategoryListResponseDTO> dtos = pageResult.stream().map((x) -> {
             CategoryListResponseDTO categoryListResponseDTO = new CategoryListResponseDTO();
             categoryListResponseDTO.setNameCategory(x.getName());
-            categoryListResponseDTO.setDescription(x.getCompanyName());
+            categoryListResponseDTO.setDescription(x.getDescription());
+            categoryListResponseDTO.setCode(x.getCode());
             return categoryListResponseDTO;
         }).collect(Collectors.toList());
 
