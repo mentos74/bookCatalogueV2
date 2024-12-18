@@ -16,7 +16,7 @@ import java.net.URI;
 @RestController
 public class PublisherResource {
 
-    private PublisherServiceImpl psm;
+    private final PublisherServiceImpl psm;
 
     @PostMapping("/v1/publisher")
     public ResponseEntity<Void> createNewPublisher(@RequestBody @Valid PublisherCreateRequestDTO dto) {
