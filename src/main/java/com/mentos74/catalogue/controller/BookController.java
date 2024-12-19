@@ -1,6 +1,6 @@
 package com.mentos74.catalogue.controller;
 
-import com.mentos74.catalogue.dto.BookCreateDTO;
+import com.mentos74.catalogue.dto.BookCreateRequestDTO;
 import com.mentos74.catalogue.dto.BookDetailDTO;
 import com.mentos74.catalogue.services.BookService;
 import jakarta.validation.Valid;
@@ -32,13 +32,13 @@ public class BookController {
 
     @GetMapping("/add")
     public String addBook(Model model) {
-        BookCreateDTO bookCreateDTO = new BookCreateDTO();
+        BookCreateRequestDTO bookCreateDTO = new BookCreateRequestDTO();
         model.addAttribute("bookCreateDTO", bookCreateDTO);
         return "book/add";
     }
 
     @PostMapping("/add")
-    public String addBookNew(@ModelAttribute("bookCreateDTO") @Valid BookCreateDTO bookCreateDTO,
+    public String addBookNew(@ModelAttribute("bookCreateDTO") @Valid BookCreateRequestDTO bookCreateDTO,
                              BindingResult bindingResult,
                              Errors errors ,
                              Model model) {

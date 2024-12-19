@@ -1,7 +1,7 @@
 package com.mentos74.catalogue.web;
 
-import com.mentos74.catalogue.dto.BookCreateDTO;
 import com.mentos74.catalogue.dto.BookDetailDTO;
+import com.mentos74.catalogue.dto.BookCreateRequestDTO;
 import com.mentos74.catalogue.dto.BookUpdateRequestDTO;
 import com.mentos74.catalogue.services.BookService;
 import lombok.AllArgsConstructor;
@@ -32,7 +32,7 @@ public class BookResource {
     }
 
     @PostMapping("/book")
-    public ResponseEntity<Void> createNewBook(@RequestBody BookCreateDTO dto){
+    public ResponseEntity<Void> createNewBook(@RequestBody BookCreateRequestDTO dto){
         bookService.createNewBook(dto);
         return  ResponseEntity.created(URI.create("/book")).build();
     }

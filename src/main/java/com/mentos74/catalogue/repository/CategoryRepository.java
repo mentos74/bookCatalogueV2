@@ -8,7 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface CategoryRepository  extends JpaRepository<Category, String> {
-    public Optional<Category> findByCode (String code);
+public interface CategoryRepository extends JpaRepository<Category, String> {
+    public Optional<Category> findByCode(String code);
+
     public Page<Category> findByNameLikeIgnoreCase(String categoryName, Pageable pageable);
 }

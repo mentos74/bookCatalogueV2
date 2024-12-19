@@ -2,10 +2,11 @@ package com.mentos74.catalogue.services.impl;
 
 import com.mentos74.catalogue.domain.Author;
 import com.mentos74.catalogue.domain.Book;
-import com.mentos74.catalogue.dto.BookCreateDTO;
+import com.mentos74.catalogue.dto.BookCreateRequestDTO;
 import com.mentos74.catalogue.dto.BookDetailDTO;
 import com.mentos74.catalogue.dto.BookUpdateRequestDTO;
 import com.mentos74.catalogue.exception.BadRequestException;
+import com.mentos74.catalogue.repository.AuthorRepository;
 import com.mentos74.catalogue.repository.BookRepository;
 import com.mentos74.catalogue.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import java.util.stream.Collectors;
 public class BookServiceImpl implements BookService{
 
 	private final BookRepository bookRepository;
+	private final AuthorRepository authorRepository;
 
 
 	@Override
@@ -53,7 +55,7 @@ public class BookServiceImpl implements BookService{
 	}
 
 	@Override
-	public void createNewBook(BookCreateDTO dto) {
+	public void createNewBook(BookCreateRequestDTO dto) {
 		Author author = new Author();
 		author.setName(dto.getAuthorName());
 
