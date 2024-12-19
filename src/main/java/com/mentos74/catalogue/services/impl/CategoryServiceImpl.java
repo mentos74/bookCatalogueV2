@@ -5,6 +5,7 @@ import com.mentos74.catalogue.domain.Publisher;
 import com.mentos74.catalogue.dto.CategoryCreateUpdateRequestDTO;
 import com.mentos74.catalogue.dto.CategoryListResponseDTO;
 import com.mentos74.catalogue.dto.ResultPageResponseDTO;
+import com.mentos74.catalogue.exception.BadRequestException;
 import com.mentos74.catalogue.repository.CategoryRepository;
 import com.mentos74.catalogue.services.CategoryService;
 import com.mentos74.catalogue.util.PaginationUtil;
@@ -44,10 +45,10 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public ResultPageResponseDTO<CategoryListResponseDTO> findCategoryList(Integer pages, Integer limit, String sortBy, String direction, String categoryName) {
         categoryName = StringUtils.isBlank(categoryName) ? "%" : categoryName + "%";
-        Sort sort = Sort.by(new Sort.Order(PaginationUtil.getSortBy(direction),sortBy));
+        Sort sort = Sort.by(new Sort.Order(PaginationUtil.getSortBy(direction), sortBy));
         Pageable pageable = PageRequest.of(pages, limit, sort);
-        System.out.println("1>>"+categoryName);
-        System.out.println("2>>"+pageable);
+        System.out.println("1>>" + categoryName);
+        System.out.println("2>>" + pageable);
         Page<Category> pageResult = categoryRepository.findByNameLikeIgnoreCase(categoryName, pageable);
 
         List<CategoryListResponseDTO> dtos = pageResult.stream().map((x) -> {
@@ -58,6 +59,15 @@ public class CategoryServiceImpl implements CategoryService {
             return categoryListResponseDTO;
         }).collect(Collectors.toList());
 
-        return PaginationUtil.createResultDTO(dtos, pageResult.getTotalElements(),pageResult.getTotalPages());
+        return PaginationUtil.createResultDTO(dtos, pageResult.getTotalElements(), pageResult.getTotalPages());
+    }
+
+    @Override
+    public List<Category> findCategoryList(List<String> categoryIdList) {
+        List<Category> categories = categoryRepository.findByCodeIn(categoryIdList);
+        if(categories.isEmpty()){
+            throw new BadRequestException("category must be exist");
+        }
+        return categories;
     }
 }

@@ -66,5 +66,14 @@ public class AuthorServiceImpl implements AuthorService {
         authorRepository.save(author);
     }
 
+    @Override
+    public List<Author> findAuthorList(List<String> authorsIdList) {
+        List <Author> listAuthors =  authorRepository.findBySecureIdIn(authorsIdList);
+        if(listAuthors.isEmpty()){
+             throw new BadRequestException("author cant be empty");
+        }
+        return listAuthors;
+    }
+
 
 }

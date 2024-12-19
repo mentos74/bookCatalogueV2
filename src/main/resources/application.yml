@@ -1,7 +1,7 @@
 app:
   currency: IDR
   timezone: Asia/Jakarta
-  welcome-text: Hello World from Tedy, are you ready. This is from properties?
+  welcome-text: Hello World jir, are you ready. This is from properties?
 cloud:
   api-key: ${CLOUD_KEY2}
 server:
@@ -39,7 +39,7 @@ server:
   port: 8003
   
 app:
-  welcome-text: Hello World from Tedy, this is development server
+  welcome-text: Hellow world jir, this is development server
   
   
 ---
