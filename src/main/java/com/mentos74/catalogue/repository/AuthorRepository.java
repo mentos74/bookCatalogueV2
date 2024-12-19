@@ -9,6 +9,7 @@ import java.util.Optional;
 @Repository
 public interface AuthorRepository extends JpaRepository<Author,Long> {
   public  Optional<Author> findById (Long id);
+  public  Optional<Author> findBySecureId (String id);
   public  Optional<Author> findByIdAndDeletedFalse (Long id);
 
 }

@@ -9,9 +9,9 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface AuthorService {
-    public AuthorResponseDTO findById(Long id);
+    public AuthorResponseDTO findById(String id);
     public List<Author> findByNameLike(String name);
     public void createNewAuthor(List <AuthorCreateRequestDTO> dto);
-    public void updateAuthor(Long id, AuthorUpdateRequestDTO dto);
-    public void deleteAuthor(Long id);
+    public void updateAuthor(String id, AuthorUpdateRequestDTO dto);
+    public void deleteAuthor(String id);
 }
