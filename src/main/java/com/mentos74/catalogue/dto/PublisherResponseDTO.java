@@ -9,13 +9,13 @@ import java.io.Serializable;
 
 @Data
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class PublisherListResponseDTO implements Serializable {
+public class PublisherResponseDTO implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = 3755903972080183445L;
+    private static final long serialVersionUID = 7971107596093889126L;
 
-    private String publisherName;
+
     private String publisherId;
-    private String companyName;
+    private String publisherName;
 
 }

@@ -1,7 +1,7 @@
 package com.mentos74.catalogue.services;
 
 import com.mentos74.catalogue.dto.BookCreateRequestDTO;
-import com.mentos74.catalogue.dto.BookDetailDTO;
+import com.mentos74.catalogue.dto.BookDetailResponseDTO;
 import com.mentos74.catalogue.dto.BookUpdateRequestDTO;
 
 import java.util.List;
@@ -9,10 +9,10 @@ import java.util.List;
 
 public interface BookService {
 
-	public BookDetailDTO findBookDetailById(Long bookId);
-	public List<BookDetailDTO> listBookDetail();
+	public BookDetailResponseDTO findBookDetailById(String bookId);
+	public List<BookDetailResponseDTO> listBookDetail();
 	public void createNewBook(BookCreateRequestDTO dto);
-	public void updateBook(Long bookId, BookUpdateRequestDTO dto);
-	public  void deleteBook(Long bookId);
+	public void updateBook(String bookId, BookUpdateRequestDTO dto);
+	public  void deleteBook(String bookId);
 
 }

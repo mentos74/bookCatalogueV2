@@ -1,7 +1,6 @@
 package com.mentos74.catalogue.services.impl;
 
 import com.mentos74.catalogue.domain.Category;
-import com.mentos74.catalogue.domain.Publisher;
 import com.mentos74.catalogue.dto.CategoryCreateUpdateRequestDTO;
 import com.mentos74.catalogue.dto.CategoryListResponseDTO;
 import com.mentos74.catalogue.dto.ResultPageResponseDTO;
@@ -69,5 +68,17 @@ public class CategoryServiceImpl implements CategoryService {
             throw new BadRequestException("category must be exist");
         }
         return categories;
+    }
+
+    @Override
+    public List<CategoryListResponseDTO> constructDTO(List<Category> categories) {
+
+        return categories.stream().map((c) ->{
+            CategoryListResponseDTO dto = new CategoryListResponseDTO();
+            dto.setCode(c.getCode());
+            dto.setDescription(c.getDescription());
+            dto.setNameCategory(c.getName());
+            return dto;
+        }).collect(Collectors.toList());
     }
 }

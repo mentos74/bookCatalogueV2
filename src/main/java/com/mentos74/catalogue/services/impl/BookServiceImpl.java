@@ -5,22 +5,19 @@ import com.mentos74.catalogue.domain.Book;
 import com.mentos74.catalogue.domain.Category;
 import com.mentos74.catalogue.domain.Publisher;
 import com.mentos74.catalogue.dto.BookCreateRequestDTO;
-import com.mentos74.catalogue.dto.BookDetailDTO;
+import com.mentos74.catalogue.dto.BookDetailResponseDTO;
 import com.mentos74.catalogue.dto.BookUpdateRequestDTO;
 import com.mentos74.catalogue.exception.BadRequestException;
-import com.mentos74.catalogue.repository.AuthorRepository;
 import com.mentos74.catalogue.repository.BookRepository;
 import com.mentos74.catalogue.services.AuthorService;
 import com.mentos74.catalogue.services.BookService;
 import com.mentos74.catalogue.services.CategoryService;
 import com.mentos74.catalogue.services.PublisherService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 import lombok.AllArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,27 +33,28 @@ public class BookServiceImpl implements BookService {
 
 
     @Override
-    public BookDetailDTO findBookDetailById(Long bookId) {
-        Book book = bookRepository.findById(bookId).
+    public BookDetailResponseDTO findBookDetailById(String bookId) {
+        Book book = bookRepository.findBySecureId(bookId).
                 orElseThrow(() -> new BadRequestException("book_id invalid"));
-        BookDetailDTO dto = new BookDetailDTO();
-        dto.setBookId(book.getId());
-//		dto.setAuthorName(book.getAuthor().getName());
+        BookDetailResponseDTO dto = new BookDetailResponseDTO();
+        dto.setBookId(book.getSecureId());
+		dto.setCategories(categoryService.constructDTO(book.getCategories()));
+		dto.setAuthors(authorService.constructDTO(book.getAuthors()));
         dto.setBookTitle(book.getTitle());
         dto.setBookDescription(book.getDescription());
         return dto;
     }
 
     @Override
-    public List<BookDetailDTO> listBookDetail() {
+    public List<BookDetailResponseDTO> listBookDetail() {
         List<Book> listAll = bookRepository.findAll();
 
         return listAll.stream().map((b) -> {
-            BookDetailDTO dto = new BookDetailDTO();
+            BookDetailResponseDTO dto = new BookDetailResponseDTO();
 //			dto.setAuthorName(b.getAuthor().getName());
             dto.setBookTitle(b.getTitle());
             dto.setBookDescription(b.getDescription());
-            dto.setBookId(b.getId());
+            dto.setBookId(b.getSecureId());
             return dto;
         }).collect(Collectors.toList());
     }
@@ -73,15 +71,16 @@ public class BookServiceImpl implements BookService {
 		book.setCategories(categories);
         book.setDescription(dto.getDescription());
         book.setTitle(dto.getBookTitle());
+		book.setDeleted(false);
 
         bookRepository.save(book);
 
     }
 
     @Override
-    public void updateBook(Long bookId, BookUpdateRequestDTO dto) {
+    public void updateBook(String bookId, BookUpdateRequestDTO dto) {
 
-        Book book = bookRepository.findById(bookId).
+        Book book = bookRepository.findBySecureId(bookId).
                 orElseThrow(() -> new BadRequestException("book_id invalid"));
         book.setTitle(dto.getBookTitle());
         book.setDescription(dto.getDescription());
@@ -92,17 +91,12 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void deleteBook(Long bookId) {
-        bookRepository.deleteById(bookId);
+    public void deleteBook(String bookId) {
+		Book book = bookRepository.findBySecureId(bookId).
+				orElseThrow(() -> new BadRequestException("book_id invalid"));
+        bookRepository.delete(book);
     }
 
-//	public BookRepository getBookRepository() {
-//		return bookRepository;
-//	}
-//
-//	public void setBookRepository(BookRepository bookRepository) {
-//		this.bookRepository = bookRepository;
-//	}
 
 
 }

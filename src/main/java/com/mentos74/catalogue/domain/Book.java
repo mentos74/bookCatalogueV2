@@ -26,7 +26,7 @@ public class Book extends AbstarctBaseEntity {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "description", nullable = true)
+    @Column(name = "description", nullable = true, columnDefinition = "text")
     private String description;
 
     @ManyToOne

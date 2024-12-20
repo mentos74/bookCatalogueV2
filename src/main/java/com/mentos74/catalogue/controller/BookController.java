@@ -1,7 +1,7 @@
 package com.mentos74.catalogue.controller;
 
 import com.mentos74.catalogue.dto.BookCreateRequestDTO;
-import com.mentos74.catalogue.dto.BookDetailDTO;
+import com.mentos74.catalogue.dto.BookDetailResponseDTO;
 import com.mentos74.catalogue.services.BookService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -25,7 +25,7 @@ public class BookController {
 
     @GetMapping("/list")
     public String findAllBook(Model model) {
-        List<BookDetailDTO> listBook = bookService.listBookDetail();
+        List<BookDetailResponseDTO> listBook = bookService.listBookDetail();
         model.addAttribute("books",listBook);
         return "book/list";
     }

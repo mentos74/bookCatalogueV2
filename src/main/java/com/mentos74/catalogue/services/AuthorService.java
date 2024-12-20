@@ -15,4 +15,6 @@ public interface AuthorService {
     public void updateAuthor(String id, AuthorUpdateRequestDTO dto);
     public void deleteAuthor(String id);
     public List <Author> findAuthorList(List <String> authorsIdList);
+
+    public List<AuthorResponseDTO> constructDTO(List<Author>authors);
 }

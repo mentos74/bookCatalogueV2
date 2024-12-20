@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -68,11 +69,21 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public List<Author> findAuthorList(List<String> authorsIdList) {
-        List <Author> listAuthors =  authorRepository.findBySecureIdIn(authorsIdList);
-        if(listAuthors.isEmpty()){
-             throw new BadRequestException("author cant be empty");
+        List<Author> listAuthors = authorRepository.findBySecureIdIn(authorsIdList);
+        if (listAuthors.isEmpty()) {
+            throw new BadRequestException("author cant be empty");
         }
         return listAuthors;
+    }
+
+    @Override
+    public List<AuthorResponseDTO> constructDTO(List<Author> authors) {
+        return authors.stream().map((c) -> {
+            AuthorResponseDTO dto = new AuthorResponseDTO();
+            dto.setAuthorName(c.getName());
+            dto.setBirthDate(c.getBirthDate().toEpochDay());
+            return dto;
+        }).collect(Collectors.toList());
     }
 
 
