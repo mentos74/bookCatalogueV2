@@ -1,10 +1,7 @@
 package com.mentos74.catalogue.services;
 
 import com.mentos74.catalogue.domain.Publisher;
-import com.mentos74.catalogue.dto.PublisherCreateRequestDTO;
-import com.mentos74.catalogue.dto.PublisherListResponseDTO;
-import com.mentos74.catalogue.dto.PublisherUpdateRequestDTO;
-import com.mentos74.catalogue.dto.ResultPageResponseDTO;
+import com.mentos74.catalogue.dto.*;
 
 public interface PublisherService {
 
@@ -13,4 +10,5 @@ public interface PublisherService {
     public ResultPageResponseDTO<PublisherListResponseDTO> findPublisherList(Integer pages, Integer limit, String sortBy,
                                                                              String direction, String publisherName);
     public Publisher findPublisher(String idPublisher);
+    public PublisherResponseDTO constructDTO(Publisher publisher);
 }

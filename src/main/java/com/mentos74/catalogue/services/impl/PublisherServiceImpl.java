@@ -1,10 +1,7 @@
 package com.mentos74.catalogue.services.impl;
 
 import com.mentos74.catalogue.domain.Publisher;
-import com.mentos74.catalogue.dto.PublisherCreateRequestDTO;
-import com.mentos74.catalogue.dto.PublisherListResponseDTO;
-import com.mentos74.catalogue.dto.PublisherUpdateRequestDTO;
-import com.mentos74.catalogue.dto.ResultPageResponseDTO;
+import com.mentos74.catalogue.dto.*;
 import com.mentos74.catalogue.exception.BadRequestException;
 import com.mentos74.catalogue.repository.PublisherRepository;
 import com.mentos74.catalogue.services.PublisherService;
@@ -76,5 +73,13 @@ public class PublisherServiceImpl implements PublisherService {
     public Publisher findPublisher(String idPublisher) {
         Publisher publisher = publisherRepository.findIdBySecureId(idPublisher).orElseThrow(()->new BadRequestException("publisher id not found"));
         return publisher;
+    }
+
+    @Override
+    public PublisherResponseDTO constructDTO(Publisher publisher) {
+        PublisherResponseDTO dto = new PublisherResponseDTO();
+        dto.setPublisherId(publisher.getSecureId());
+        dto.setPublisherName(publisher.getName());
+        return dto;
     }
 }

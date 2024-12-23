@@ -41,6 +41,7 @@ public class BookServiceImpl implements BookService {
 		dto.setCategories(categoryService.constructDTO(book.getCategories()));
 		dto.setAuthors(authorService.constructDTO(book.getAuthors()));
         dto.setBookTitle(book.getTitle());
+        dto.setPublisher(publisherService.constructDTO(book.getPublisher()));
         dto.setBookDescription(book.getDescription());
         return dto;
     }
