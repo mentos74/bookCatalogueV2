@@ -15,7 +15,7 @@ spring:
       max-lifetime: 1800000
       maximum-pool-size: 10
     url: jdbc:postgresql://127.0.0.1/book_catalog
-    username: mentos74
+    username: postgres
     password: postgres
   jpa:
     database: POSTGRESQL
