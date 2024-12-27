@@ -2,12 +2,14 @@ package com.mentos74.catalogue.dto;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.mentos74.catalogue.annotation.LogThisArg;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
 
+@LogThisArg
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @Data
 public class PublisherCreateRequestDTO implements Serializable {

@@ -11,13 +11,22 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class LoggingAspect {
 
-    @Pointcut("execution(* com.mentos74.catalogue.web.BookResource.*(..))")
+    @Pointcut("execution(* com.mentos74.catalogue.web.*.*(..))")
     private void restAPI() {
     }
 
-    @Before("restAPI()")
+    @Pointcut("within (com.mentos74.catalogue.web.*)")
+    private void withinPointCutExample(){}
+
+    @Pointcut("args(com.mentos74.catalogue.dto.PublisherCreateRequestDTO)")
+    private void argsPointCutExample(){}
+
+    @Pointcut("@args(com.mentos74.catalogue.annotation.LogThisArgs)")
+    private void argsAnnotationPointcutExample(){}
+
+    @Before("restAPI() && argsAnnotationPointcutExample()")
     private void beforeExecuteLoggig() {
-        log.info("log sebelum eksekusi");
+        log.info("log sebelum eksekusi dari aspect");
     }
 
 
