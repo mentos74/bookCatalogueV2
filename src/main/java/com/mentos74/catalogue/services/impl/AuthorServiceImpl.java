@@ -4,11 +4,12 @@ import com.mentos74.catalogue.domain.Author;
 import com.mentos74.catalogue.dto.AuthorCreateRequestDTO;
 import com.mentos74.catalogue.dto.AuthorResponseDTO;
 import com.mentos74.catalogue.dto.AuthorUpdateRequestDTO;
-import com.mentos74.catalogue.exception.BadRequestException;
+import com.mentos74.catalogue.exception.ResourceNotFoundException;
 import com.mentos74.catalogue.repository.AuthorRepository;
 import com.mentos74.catalogue.services.AuthorService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.ResourceAccessException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public AuthorResponseDTO findById(String id) {
         Author author = authorRepository.findBySecureId(id)
-                .orElseThrow(() -> new BadRequestException("invalid.authorId"));
+                .orElseThrow(() -> new ResourceNotFoundException("invalid.authorId"));
 
         AuthorResponseDTO responseDTO = new AuthorResponseDTO();
         responseDTO.setAuthorName(author.getName());
@@ -55,7 +56,7 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public void updateAuthor(String id, AuthorUpdateRequestDTO dto) {
-        Author author = authorRepository.findBySecureId(id).orElseThrow(() -> new BadRequestException("invalidId"));
+        Author author = authorRepository.findBySecureId(id).orElseThrow(() -> new ResourceNotFoundException("invalidId"));
         author.setBirthDate(dto.getBirthDate() == null ? author.getBirthDate() : LocalDate.ofEpochDay(dto.getBirthDate()));
         author.setName(dto.getAuthorName() == null ? author.getName() : dto.getAuthorName());
         authorRepository.save(author);
@@ -63,7 +64,7 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public void deleteAuthor(String id) {
-        Author author = authorRepository.findBySecureId(id).orElseThrow(() -> new BadRequestException("invalidId"));
+        Author author = authorRepository.findBySecureId(id).orElseThrow(() -> new ResourceNotFoundException("invalidId"));
         authorRepository.save(author);
     }
 
@@ -71,7 +72,7 @@ public class AuthorServiceImpl implements AuthorService {
     public List<Author> findAuthorList(List<String> authorsIdList) {
         List<Author> listAuthors = authorRepository.findBySecureIdIn(authorsIdList);
         if (listAuthors.isEmpty()) {
-            throw new BadRequestException("author cant be empty");
+            throw new ResourceNotFoundException("author cant be empty");
         }
         return listAuthors;
     }
