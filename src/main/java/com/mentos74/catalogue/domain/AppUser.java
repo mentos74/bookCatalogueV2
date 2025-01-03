@@ -6,7 +6,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serial;
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class AppUser extends AbstarctBaseEntity implements UserDetails {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = {
             @JoinColumn(name = "user_id", referencedColumnName = "id")
     }, inverseJoinColumns = {

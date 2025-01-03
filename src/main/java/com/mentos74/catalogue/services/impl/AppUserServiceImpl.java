@@ -6,8 +6,10 @@ import com.mentos74.catalogue.services.AppUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 
+@Service
 @AllArgsConstructor
 public class AppUserServiceImpl implements AppUserService {
 
@@ -15,6 +17,6 @@ public class AppUserServiceImpl implements AppUserService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return appUserRepository.findByUserName(username).orElseThrow(() -> new ResourceNotFoundException("invalid username"));
+        return appUserRepository.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException("invalid username"));
     }
 }
