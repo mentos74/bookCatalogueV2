@@ -1,5 +1,6 @@
 package com.mentos74.catalogue.services.impl;
 
+import com.mentos74.catalogue.domain.Address;
 import com.mentos74.catalogue.domain.Author;
 import com.mentos74.catalogue.dto.AuthorCreateRequestDTO;
 import com.mentos74.catalogue.dto.AuthorResponseDTO;
@@ -47,6 +48,17 @@ public class AuthorServiceImpl implements AuthorService {
             author.setName(dto.getAuthorName());
             author.setBirthDate(LocalDate.ofEpochDay(dto.getBirthDate()));
             author.setDeleted(false);
+
+            List <Address> addresses =  dto.getAddresses().stream().map((a) -> {
+                Address address = new Address();
+                address.setAuthor(author);
+                address.setCityName(a.getCityName());
+                address.setZipCode(a.getZipCode());
+                address.setStreetName(a.getStreetName());
+                return address;
+            }).collect(Collectors.toList());
+            author.setAddresses(addresses);
+
             listAuthor.add(author);
         }
 

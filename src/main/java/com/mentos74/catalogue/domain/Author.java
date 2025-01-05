@@ -11,6 +11,7 @@ import org.hibernate.annotations.Where;
 
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -30,15 +31,15 @@ public class Author extends AbstarctBaseEntity {
     @SequenceGenerator(name = "author_generator",sequenceName = "author_id_seq")
     private Long id;
 
-
-
-
     @Column(name = "author_name", nullable = false, columnDefinition = "varchar(300)")
     private String name;
 
 
     @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    private List<Address> addresses;
 
 
 
