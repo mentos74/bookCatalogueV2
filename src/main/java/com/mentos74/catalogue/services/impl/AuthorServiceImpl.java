@@ -10,12 +10,10 @@ import com.mentos74.catalogue.repository.AuthorRepository;
 import com.mentos74.catalogue.services.AuthorService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.ResourceAccessException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service

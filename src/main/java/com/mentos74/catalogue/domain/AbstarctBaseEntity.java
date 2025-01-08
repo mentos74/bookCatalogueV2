@@ -1,9 +1,7 @@
 package com.mentos74.catalogue.domain;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Index;
 import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.Table;
 import lombok.Data;
 
 import java.io.Serializable;

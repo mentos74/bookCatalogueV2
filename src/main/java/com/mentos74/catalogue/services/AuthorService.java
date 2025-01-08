@@ -4,7 +4,7 @@ import com.mentos74.catalogue.domain.Author;
 import com.mentos74.catalogue.dto.AuthorCreateRequestDTO;
 import com.mentos74.catalogue.dto.AuthorResponseDTO;
 import com.mentos74.catalogue.dto.AuthorUpdateRequestDTO;
-import org.springframework.http.ResponseEntity;
+
 
 import java.util.List;
 
